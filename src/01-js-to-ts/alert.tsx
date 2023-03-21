@@ -13,6 +13,10 @@ export const Alert: FC<Props> = ({ messageId, variant }) => {
     throw new Error('The messageId prop is required');
   }
 
+
+
+console.log('heeee');
+
   return (
     <div className={`alert alert-${variant}`} role="alert">
       {formatMessage({ id: messageId })}
