@@ -1,11 +1,13 @@
 import { FC } from 'react';
 import { LabeledInput } from '../components';
 
-function getConfigItem(section: string, item: string) {
-  const config: any = {
+function getConfigItem<TSchema extends keyof typeof config, TItem  extends keyof typeof config[TSchema]>
+(section: TSchema, item:  TItem) {
+  const config = {
     user: {
       firstName: 'John',
       birthDate: new Date(1990, 6, 10),
+      lastName: 'Jay'
     },
     address: {
       street: 'Main St',
@@ -20,9 +22,9 @@ function getConfigItem(section: string, item: string) {
 export const Configuration: FC = () => {
   const firstName = getConfigItem('user', 'firstName');
   const lastName = getConfigItem('user', 'lastName');
-  const birthDate = getConfigItem('user', 'birthDate');
+  const birthDate = getConfigItem('user', 'birthDate').toDateString();
 
-  const employer = getConfigItem('employer', 'name');
+  // const employer = getConfigItem('employer', 'name');
 
   const street = getConfigItem('address', 'street');
   const houseNumber = getConfigItem('address', 'houseNumber');

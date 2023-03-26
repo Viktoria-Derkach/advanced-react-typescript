@@ -16,6 +16,8 @@ export type ExtraIngredient = Readonly<{
   price: number;
 }>;
 
-export type PizzaOnOrder = Pick<Pizza, 'name' | 'price'> & {
-  extraIngredients: ExtraIngredient[];
-};
+type Resolve<T> = T extends Function ? T : {[K in keyof T]: Resolve<T[K]>}
+
+export type PizzaOnOrder = Resolve<Pick<Pizza, 'name' | 'price'> & {
+ readonly extraIngredients: ExtraIngredient[];
+}>;

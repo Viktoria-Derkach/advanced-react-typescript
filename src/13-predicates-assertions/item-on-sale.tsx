@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { BookOnSale } from './book-on-sale';
 import { MagazineOnSale } from './magazine-on-sale';
 import { PenOnSale } from './pen-on-sale';
-import { Book, ItemsOnSale, Magazine, Pen } from './types';
+import { ItemsOnSale, assertsNever } from './types';
 
 type Props = {
   item: ItemsOnSale;
@@ -11,11 +11,16 @@ type Props = {
 export const ItemOnSale: FC<Props> = ({ item }) => {
   switch (item.type) {
     case 'book':
-      return <BookOnSale book={item as Book} />;
+        return <BookOnSale book={item} />;
+
     case 'magazine':
-      return <MagazineOnSale magazine={item as Magazine} />;
-    // case 'pen':
-    //   return <PenOnSale pen={item as Pen} />;
+        return <MagazineOnSale magazine={item} />;
+
+    case 'pen':
+        return <PenOnSale pen={item} />;
+
+    default:
+      assertsNever(item)
   }
 
   return null;

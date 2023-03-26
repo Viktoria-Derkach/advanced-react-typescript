@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import type { ExtraIngredients, Pizza } from './types';
 
 import { PizzaShop } from './pizza-shop';
+import { extraIngredientsSchema } from './schema';
 
 const server = 'http://localhost:3000';
 
@@ -19,6 +20,7 @@ export const PizzaShopDataLoader: FC = () => {
       '/api/bad-extra-ingredients.json',
       (resource, init) =>
         fetch(`${server}${resource}`, init).then((res) => res.json())
+        .then(extraIngredientsSchema.parse)
     );
 
   if (pizzasError || extraIngredientsError) {

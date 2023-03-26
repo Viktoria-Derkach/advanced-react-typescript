@@ -1,13 +1,14 @@
-import { FC, useState } from 'react';
+import { FC, ReactElement, useState } from 'react';
 import { LabeledInput } from '../components';
 
-type Props = {
+type Props<TData> = {
   header: string;
-  initialValues: any;
-  onSubmit: (values: any) => void;
+  initialValues: TData;
+  onSubmit: (values: TData) => void;
 };
 
-export const GenericForm: FC<Props> = ({ header, initialValues, onSubmit }) => {
+export function GenericForm<TData extends Record<string, string | number | readonly string[] | undefined>>
+  ({ header, initialValues, onSubmit }: Props<TData>): ReactElement {
   const [values, setValues] = useState(initialValues);
 
   return (

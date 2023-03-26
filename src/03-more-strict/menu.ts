@@ -54,6 +54,15 @@ export const extraIngredients: ExtraIngredients = {
 
 export const getExtraIngredient = (name: string): ExtraIngredient => {
   const extraIngredient = extraIngredients[name];
+  if (!extraIngredient) {
+    console.warn(`No ${name} was found`);
+
+    return {name, price: 0.5}
+  }
 
   return extraIngredient;
 };
+
+const data = [1, 2]
+const num = data[1]
+console.log(num?.toString());
